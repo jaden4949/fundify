@@ -22,7 +22,7 @@ function CreateCampaign() {
   return (
     <div>
       <h1>Create Campaign</h1>
-      <form onSubmit={handleSubmit}>
+      <forum onSubmit={handleSubmit}>
         <label>
           Title:
           <input
@@ -54,7 +54,7 @@ function CreateCampaign() {
           />
         </label>
         <button type="submit">Create Campaign</button>
-      </form>
+      </forum>
     </div>
   );
 }

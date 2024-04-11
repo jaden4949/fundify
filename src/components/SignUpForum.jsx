@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../App.css'; // Import SignUpForum CSS file for styling
 
-export default class SignUpForm extends Component {
+class SignUpForum extends Component {
   state = {
     name: '',
     email: '',
@@ -16,10 +18,10 @@ export default class SignUpForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    if (this.state.password !== this.state.confirm) {
+    if (this.state.password!== this.state.confirm) {
       this.setState({ error: 'Passwords do not match' });
     } else {
-      console.log('Form submitted:', this.state);
+      console.log('Forum submitted:', this.state);
       this.setState({
         name: '',
         email: '',
@@ -30,26 +32,34 @@ export default class SignUpForm extends Component {
     }
   };
 
-  handleChange = (evt) => {
+  handleClose = () => {
+    // Logic to close the sign-up form and navigate to the homepage
+    console.log('Closing sign-up form');
     this.setState({
-      [evt.target.name]: evt.target.value,
+      name: '',
+      email: '',
+      password: '',
+      confirm: '',
       error: ''
     });
-  };
-  
+    window.location.href = '/'; // Redirect to the home page
+};
+
+
   render() {
-    const disable = this.state.password !== this.state.confirm;
+    const disable = this.state.password!== this.state.confirm;
     return (
-      <div>
+      <div className="signup-container">
         <div className="form-container">
+          <button className="close-button" onClick={this.handleClose}>X</button>
           <form autoComplete="off" onSubmit={this.handleSubmit}>
-            <label>Name</label>
+            <label>UserName</label>
             <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required />
             <label>Email</label>
             <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
             <label>Password</label>
             <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-            <label>Confirm</label>
+            <label>Confirm Password</label>
             <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
             <button type="submit" disabled={disable}>SIGN UP</button>
           </form>
@@ -59,3 +69,6 @@ export default class SignUpForm extends Component {
     );
   }
 }
+
+// export default withRouter(SignUpForum);
+export default SignUpForum;

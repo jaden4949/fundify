@@ -1,10 +1,10 @@
-import SignUpForm from './components/SignUpForm/';
+import SignUpForum from '../components/SignUpForum';
 
 export default function AuthPage() {
   return (
     <main>
       <h1>AuthPage</h1>
-      <SignUpForm />
+      <SignUpForum />
     </main>
   );
 }
