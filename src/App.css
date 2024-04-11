@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 30vmin;
   pointer-events: none;
 }
 
@@ -33,17 +33,21 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 1rem;
+  height: 10%;
+  padding: 1.5rem;
   box-sizing: border-box;
-  gap: 1rem;
-  background-color: #282c34;
-  border: 1px solid #282c34;
+  gap: 2rem;
+  background-color: #575f6e;
+  border: none;
+  border-bottom: 1px solid #00ff88;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .App-nav-links {
   display: flex;
-  gap: 1rem; /* Add space between items */
+  gap: 2rem; /* Increase space between items */
+  font-size: 1.1rem;
+  font-weight: bold;
 }
 
 
@@ -53,6 +57,13 @@
 
 .App-link {
   color: #00ff88;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+  font-size: 1.5rem;
+}
+
+.App-link:hover {
+  color: #ffffff;
 }
 
 @keyframes App-logo-spin {

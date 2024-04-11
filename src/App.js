@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import CreateCampaign from './components/CreateCampaign';
+import FundifyLogo from './Fundify2.png'; // Import the Fundify logo
 
 function App() {
   const [navbarOffsetTop, setNavbarOffsetTop] = useState(0);
@@ -20,11 +21,8 @@ function App() {
             className="App-nav"
             style={{ top: navbarOffsetTop }}
           >
-            <Link
-              to="/fundify"
-              className="App-link"
-            >
-              Fundify
+            <Link to="/" className="App-link"> {/* Use Link component */}
+              <img src={FundifyLogo} alt="Fundify" className="logo" style={{ width: '100px', height: 'auto' }} /> {/* Insert the logo and adjust size */}
             </Link>
             <div className="App-nav-links"> {/* Container for the right-aligned buttons */}
               <Link
