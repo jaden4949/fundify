@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css'; // Import SignUpForum CSS file for styling
+import { signUp } from '../utilities/users-service';
 
 class SignUpForum extends Component {
   state = {
@@ -16,12 +17,12 @@ class SignUpForum extends Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = async(event) => {
     event.preventDefault();
     if (this.state.password!== this.state.confirm) {
       this.setState({ error: 'Passwords do not match' });
     } else {
-      console.log('Forum submitted:', this.state);
+      await signUp({name:this.state.name, email:this.state.email, password:this.state.password});
       this.setState({
         name: '',
         email: '',
