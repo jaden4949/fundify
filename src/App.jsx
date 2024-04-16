@@ -7,10 +7,8 @@ import { getUser } from './utilities/users-service';
 import NavBar from './components/NavBar'; // Import NavBar component
 
 function App() {
- 
   const [user, setUser] = useState(getUser());
 
- 
     return(
       <div className="App">
       <Router>
@@ -20,11 +18,11 @@ function App() {
         </header>
 
         <Routes>
-          <Route path="/signup" element={<SignUpForum />} />
-          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/signup" element={<SignUpForum setUser={setUser}/>} />
+          <Route path="/auth" element={<AuthPage setUser={setUser}/>} />
           {/* Add other routes here */}
         </Routes>
-    </Router>
+      </Router>
       </div>
     )
 }

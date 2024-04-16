@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import * as userService from '../utilities/users-service';
 import FundifyLogo from '../Fundify2.png';
 
-const navbarOffsetTop = '50px';
+const navbarOffsetTop = '0px';
 
 export default function NavBar({ user, setUser }) {
     function handleLogOut() {

@@ -22,7 +22,8 @@ class SignUpForum extends Component {
     if (this.state.password!== this.state.confirm) {
       this.setState({ error: 'Passwords do not match' });
     } else {
-      await signUp({name:this.state.name, email:this.state.email, password:this.state.password});
+      const user = await signUp({name:this.state.name, email:this.state.email, password:this.state.password});
+      this.props.setUser(user);
       this.setState({
         name: '',
         email: '',
