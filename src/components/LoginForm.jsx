@@ -32,7 +32,7 @@ export default function LoginForm({ setUser }) {
 
   return (
     <div>
-      <div className="LoginForm-container"></div>
+      {/* <div className="LoginForm-container"></div> need to figure out why this isnt working */}
       <div className="form-container">
         <form autoComplete="off" onSubmit={handleSubmit}>
           <label>Username</label>
