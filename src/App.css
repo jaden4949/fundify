@@ -223,6 +223,14 @@
   color: #ffffff;
 }
 
+.App-nav button {
+  background-color: transparent;
+  color: #00ff88;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+  font-size: 1.5rem;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

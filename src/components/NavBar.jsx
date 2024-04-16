@@ -21,16 +21,17 @@ export default function NavBar({ user, setUser }) {
       </Link>
       <div className="App-nav-links">
         <Link to="/campaigns" className="App-link">Browse Campaigns</Link>
-        <Link to="/create" className="App-link">Create Campaign</Link>
-        <Link to="" onClick={handleLogOut}>Log Out</Link>
-        {user ? "": <Link to="/signup" className="App-link">Sign-Up</Link>} 
-        {user ? "": <Link to="/login" className="App-link">Login</Link>}
-        {/* <span>Welcome {user.name}</span> */}
-        {/* {user && <Link to="/profile" className="App-link">Profile</Link>}
-        {user && <span>Welcome, {user.name}</span>}
-        {!user && <Link to="/login" className="App-link">Login</Link>}
-        {/* &nbsp;&nbsp;<span>Welcome, {user.name}</span> */}
+        {user && <Link to="/create" className="App-link">Create Campaign</Link>}
+        {user && <Link to="/account" className="App-link">My Account</Link>}
+        {user? (
+          <button onClick={handleLogOut} className="App-link">Log Out</button>
+        ) : (
+          <>
+            <Link to="/signup" className="App-link">Sign-Up</Link>
+            <Link to="/login" className="App-link">Login</Link>
+          </>
+        )}
       </div>
     </nav>
   );
- }
+}

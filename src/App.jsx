@@ -6,6 +6,8 @@ import SignUpForum from './components/SignUpForum'; // Import SignUpForum compon
 import LoginForm from './components/LoginForm';
 import { getUser } from './utilities/users-service';
 import NavBar from './components/NavBar'; // Import NavBar component
+import CreateCampaign from './components/CreateCampaign';
+import Account from './components/Account';
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -22,6 +24,7 @@ function App() {
         <Route path="/signup" element={<SignUpForum setUser={setUser}/>} />
           <Route path="/login" element={<LoginForm setUser={setUser}/>} />
           <Route path="/auth" element={<AuthPage setUser={setUser}/>} />
+          <Route path="/create" element={<CreateCampaign />} />
           {/* Add other routes here */}
         </Routes>
       </Router>
