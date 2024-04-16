@@ -1,28 +1,46 @@
 import React, { useState } from 'react';
+import { createCampaign } from '../utilities/campaigns-service.js';
 
 function CreateCampaign() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState(0);
   const [photo, setPhoto] = useState(null);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false); // State to control success message visibility
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Handle form submission here
-    //...
+    // Prepare campaign data object
+    const campaignData = {
+      title,
+      description,
+      amount,
+      photo
+    };
 
-    // Reset form fields
-    setTitle('');
-    setDescription('');
-    setAmount(0);
-    setPhoto(null);
+    try {
+      // Send campaign data to the server
+      await createCampaign(campaignData);
+      
+      // Reset form fields
+      setTitle('');
+      setDescription('');
+      setAmount(0);
+      setPhoto(null);
+
+      // Display success message
+      setShowSuccessMessage(true);
+    } catch (error) {
+      console.error('Error creating campaign:', error);
+      // Optionally, handle errors (e.g., display error message)
+    }
   };
 
   return (
     <div>
       <h1>Create Campaign</h1>
-      <forum onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}> {/* Corrected typo: forum to form */}
         <label>
           Title:
           <input
@@ -54,7 +72,8 @@ function CreateCampaign() {
           />
         </label>
         <button type="submit">Create Campaign</button>
-      </forum>
+      </form>
+      {showSuccessMessage && <div>Campaign created successfully!</div>} {/* Display success message */}
     </div>
   );
 }
