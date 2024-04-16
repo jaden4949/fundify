@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as usersService from '../utilities/users-service';
 import '../App.css';
 
-export default function LoginForm({ setUser }) {
+export default function LoginForm() {
   const [credentials, setCredentials] = useState({
     name: '',
     password: ''
@@ -17,8 +17,7 @@ export default function LoginForm({ setUser }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      const user = await usersService.login(credentials);
-      setUser(user);
+      const loggedInUser = await usersService.login(credentials);
       // Redirect to the homepage after successful login
       window.location.href = '/'; // Replace '/' with the URL of your homepage
     } catch {
@@ -26,9 +25,15 @@ export default function LoginForm({ setUser }) {
     }
   }
 
+  function handleCloseForm() {
+    // Redirect to the homepage
+    window.location.href = '/'; // Replace '/' with the URL of your homepage
+  }
+
   return (
-    <div>
+    <div className="signup-container">
       <div className="form-container">
+        <button className="close-button" onClick={handleCloseForm}>X</button>
         <form autoComplete="off" onSubmit={handleSubmit}>
           <label>Username</label>
           <input type="text" name="name" value={credentials.name} onChange={handleChange} required />

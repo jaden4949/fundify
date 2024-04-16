@@ -209,6 +209,8 @@
 
 
 .App-title {
+  position: absolute;
+  top: 100px;
   margin-top: 5rem;
 }
 
@@ -230,6 +232,57 @@
   transition: color 0.2s ease-in-out;
   font-size: 1.5rem;
 }
+
+.CreateCampaign-container {
+  text-align: center;
+  margin-top: 10vh; /* Adjusted margin for vertical centering */
+}
+
+.CreateCampaign-title {
+  font-size: 1.5rem; /* Decreased font size for the title */
+  margin-bottom: 1rem; /* Decreased margin for the title */
+}
+
+.CreateCampaign-form {
+  width: 80%; /* Adjusted width for the form */
+  max-width: 400px; /* Set maximum width for the form */
+  margin: 0 auto; /* Center the form horizontally */
+}
+
+.CreateCampaign-label {
+  color: #ffffff;
+  font-size: 1rem;
+  margin-bottom: 0.5rem; /* Decreased margin for the labels */
+}
+
+.CreateCampaign-input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem; /* Decreased margin for the inputs */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.CreateCampaign-button {
+  background-color: #00ff88;
+  color: #6e6e6e;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.CreateCampaign-button:hover {
+  background-color: #00cc66;
+}
+
+.CreateCampaign-success-message {
+  color: #00ff88;
+  margin-top: 1rem;
+}
+
 
 @keyframes App-logo-spin {
   from {

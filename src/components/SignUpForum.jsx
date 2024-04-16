@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { signUp } from '../utilities/users-service';
 
-class SignUpForum extends Component {
+class SignUpForm extends Component {
   state = {
     name: '',
     email: '',
@@ -40,7 +40,7 @@ class SignUpForum extends Component {
   };
 
   handleClose = () => {
-    // Close the form without signing up
+    // Close the form and redirect to the home page
     this.setState({
       name: '',
       email: '',
@@ -49,6 +49,8 @@ class SignUpForum extends Component {
       error: '',
       formVisible: false
     });
+    // Redirect to the home page
+    window.location.href = '/';
   };
 
   render() {
@@ -78,4 +80,4 @@ class SignUpForum extends Component {
   }
 }
 
-export default SignUpForum;
+export default SignUpForm;
