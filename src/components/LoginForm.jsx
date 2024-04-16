@@ -14,17 +14,13 @@ export default function LoginForm({ setUser }) {
     setError('');
   }
 
-  
-
   async function handleSubmit(evt) {
-    // Prevent form from being submitted to the server
     evt.preventDefault();
     try {
-      // The promise returned by the login service method 
-      // will resolve to the user object included in the
-      // payload of the JSON Web Token (JWT)
       const user = await usersService.login(credentials);
       setUser(user);
+      // Redirect to the homepage after successful login
+      window.location.href = '/'; // Replace '/' with the URL of your homepage
     } catch {
       setError('Log In Failed - Try Again');
     }
@@ -32,7 +28,6 @@ export default function LoginForm({ setUser }) {
 
   return (
     <div>
-      {/* <div className="LoginForm-container"></div> need to figure out why this isnt working */}
       <div className="form-container">
         <form autoComplete="off" onSubmit={handleSubmit}>
           <label>Username</label>
