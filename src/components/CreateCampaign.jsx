@@ -31,6 +31,11 @@ function CreateCampaign() {
 
       // Display success message
       setShowSuccessMessage(true);
+
+      // Redirect to the main page after 2 seconds
+      setTimeout(() => {
+        window.location.href = '/'; // Redirect to the main page
+      }, 2000);
     } catch (error) {
       console.error('Error creating campaign:', error);
       // Optionally, handle errors (e.g., display error message)
