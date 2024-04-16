@@ -3,7 +3,13 @@ const Campaign = require('../../models/campaign');
 // Controller function to create a new campaign
 const createCampaign = async (req, res) => {
   try {
-    const { title, description, amount, photo } = req.body;
+    let { title, description, amount, photo } = req.body;
+
+    // If photo is an object (like FormData), extract the file name
+    if (typeof photo === 'object' && photo !== null) {
+      photo = photo.name; // Assuming the object has a name property
+    }
+
     // Create a new campaign instance
     const newCampaign = new Campaign({
       title,
@@ -11,6 +17,7 @@ const createCampaign = async (req, res) => {
       amount,
       photo
     });
+
     // Save the campaign to the database
     await newCampaign.save();
     console.log("campaign created", newCampaign)
