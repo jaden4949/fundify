@@ -24,7 +24,7 @@ export default function NavBar({ user, setUser }) {
         {user && <Link to="/create" className="App-link">Create Campaign</Link>}
         {user && <Link to="/account" className="App-link">My Account</Link>}
         {user? (
-          <button onClick={handleLogOut} className="App-link">Log Out</button>
+          <button onClick={handleLogOut} className="App-link log-out-button"><b>Log Out</b></button>
         ) : (
           <>
             <Link to="/signup" className="App-link">Sign-Up</Link>
