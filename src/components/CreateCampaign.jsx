@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createCampaign } from '../utilities/campaigns-service'; // Assuming you have a function to create campaigns
 import '../App.css'; // Import the CSS file
 
 const CreateCampaign = () => {
@@ -21,7 +22,7 @@ const CreateCampaign = () => {
 
     try {
       // Send campaign data to the server
-      await CreateCampaign(campaignData);
+      await createCampaign(campaignData);
 
       // Reset form fields
       setTitle('');
