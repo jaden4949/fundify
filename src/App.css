@@ -286,6 +286,41 @@
   margin-top: 1rem;
 }
 
+/* Campaigns container */
+.campaigns {
+  margin-top: 20px;
+}
+
+/* Campaign item */
+.campaign-item {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+/* Campaign image */
+.campaign-image {
+  width: 200px; /* Adjust as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Campaign title */
+.campaign-title {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+/* Campaign description */
+.campaign-description {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Amount raised */
+.amount-raised {
+  font-size: 14px;
+  color: #333;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

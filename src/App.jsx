@@ -8,6 +8,10 @@ import { getUser } from './utilities/users-service';
 import NavBar from './components/NavBar'; // Import NavBar component
 import CreateCampaign from './components/CreateCampaign';
 import Account from './components/Account';
+import Campaigns from './components/Campaigns';
+import HomePage from './components/HomePage';
+
+// Main App component
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -25,6 +29,8 @@ function App() {
           <Route path="/login" element={<LoginForm setUser={setUser}/>} />
           <Route path="/auth" element={<AuthPage setUser={setUser}/>} />
           <Route path="/create" element={<CreateCampaign />} />
+          <Route path="/campaigns" element={<Campaigns />} />
+          <Route path="/" element={<HomePage />} />
           {/* Add other routes here */}
         </Routes>
       </Router>
