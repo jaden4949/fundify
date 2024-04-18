@@ -9,7 +9,7 @@ const campaignSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    amount: {
+    goal: {
         type: Number,
         required: true
     },

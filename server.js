@@ -8,6 +8,12 @@ require('dotenv').config();
 require('./config/database');
 
 const app = express();
+app.use(express.json());
+
+const campaignRoutes = require('./routes/api/campaigns');
+
+// Use routes
+app.use('/api/campaigns', campaignRoutes);
 
 app.use(logger('dev'));
 app.use(express.json());

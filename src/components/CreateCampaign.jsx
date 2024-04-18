@@ -5,7 +5,7 @@ import '../App.css'; // Import the CSS file
 const CreateCampaign = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [amount, setAmount] = useState(0);
+  const [goal, setGoal] = useState(0);
   const [photo, setPhoto] = useState(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
@@ -16,7 +16,7 @@ const CreateCampaign = () => {
     const campaignData = {
       title,
       description,
-      amount,
+      goal,
       photo
     };
 
@@ -27,7 +27,7 @@ const CreateCampaign = () => {
       // Reset form fields
       setTitle('');
       setDescription('');
-      setAmount(0);
+      setGoal(0);
       setPhoto(null);
 
       // Display success message
@@ -73,14 +73,14 @@ const CreateCampaign = () => {
             onChange={(event) => setDescription(event.target.value)}
             className="CreateCampaign-input"
           />
-          <label htmlFor="amount" className="CreateCampaign-label">
+          <label htmlFor="goal" className="CreateCampaign-label">
             Amount to be raised:
           </label>
           <input
             type="number"
-            id="amount"
-            value={amount}
-            onChange={(event) => setAmount(event.target.value)}
+            id="goal"
+            value={goal}
+            onChange={(event) => setGoal(event.target.value)}
             className="CreateCampaign-input"
           />
           <label htmlFor="photo" className="CreateCampaign-label">

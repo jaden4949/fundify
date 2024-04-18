@@ -5,15 +5,16 @@ async function createCampaign(req, res) {
     console.log('---Backend Received campaign data:', req.body);
 
     // Extract campaign data from the request body
-    const { title, description, amount, photo } = req.body;
+    const { title, description, goal, photo } = req.body;
 
     try {
-        // Create a new campaign instance
+        // Create a new campaign instance with raised amount initialized to 0
         const campaign = new Campaign({
             title,
             description,
-            amount,
-            photo
+            goal,
+            photo,
+            raised: 0 // Initialize raised amount to 0
         });
 
         // Save the campaign to the database
@@ -38,7 +39,7 @@ async function getAllCampaigns(req, res) {
       res.status(500).json({ error: 'An error occurred while getting campaigns' });
     }
   }
-  
+
 // Controller to get a specific campaign by ID
 async function getCampaignById(req, res) {
     const { id } = req.params;
@@ -100,10 +101,32 @@ async function deleteCampaign(req, res) {
     }
 }
 
+// Controller to process a donation to a campaign
+async function processDonation(req, res) {
+    const { id } = req.params;
+    const { amount } = req.body; // This should be the donation amount sent in the request body
+
+    try {
+        // Find the campaign by ID and update the raised amount
+        const updatedCampaign = await Campaign.findByIdAndUpdate(
+          id,
+          { $inc: { raised: amount } }, // Increment the 'raised' amount by the donated amount
+          { new: true }
+        );
+
+        // Send back the updated campaign
+        res.status(200).json(updatedCampaign);
+    } catch (error) {
+        console.error('Error processing donation:', error);
+        res.status(500).json({ error: 'An error occurred while processing the donation' });
+    }
+}
+
 module.exports = {
     createCampaign,
     getAllCampaigns,
     getCampaignById,
     updateCampaign,
-    deleteCampaign
+    deleteCampaign,
+    processDonation // Make sure to export the processDonation function
 };

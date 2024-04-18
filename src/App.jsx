@@ -1,41 +1,40 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import AuthPage from './pages/AuthPage'; // Import AuthPage component
-import SignUpForum from './components/SignUpForum'; // Import SignUpForum component
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AuthPage from './pages/AuthPage';
+import SignUpForum from './components/SignUpForum';
 import LoginForm from './components/LoginForm';
 import { getUser } from './utilities/users-service';
-import NavBar from './components/NavBar'; // Import NavBar component
+import NavBar from './components/NavBar';
 import CreateCampaign from './components/CreateCampaign';
 import Account from './components/Account';
 import Campaigns from './components/Campaigns';
 import HomePage from './components/HomePage';
-
-// Main App component
+import CampaignDetail from './components/CampaignDetail';
 
 function App() {
   const [user, setUser] = useState(getUser());
 
-    return(
-      <div className="App">
+  return (
+    <div className="App">
       <Router>
         <header className="App-header">
-          <NavBar user={ user } setUser={ setUser }/>
+          <NavBar user={user} setUser={setUser} />
           <h1 className="App-title">Welcome to our crowdfunding platform!</h1>
         </header>
-
         <Routes>
-        <Route path="/signup" element={<SignUpForum setUser={setUser}/>} />
-          <Route path="/login" element={<LoginForm setUser={setUser}/>} />
-          <Route path="/auth" element={<AuthPage setUser={setUser}/>} />
+          <Route path="/signup" element={<SignUpForum setUser={setUser} />} />
+          <Route path="/login" element={<LoginForm setUser={setUser} />} />
+          <Route path="/auth" element={<AuthPage setUser={setUser} />} />
           <Route path="/create" element={<CreateCampaign />} />
-          <Route path="/campaigns" element={<Campaigns />} />
+          <Route path="/account" element={<Account />} />
           <Route path="/" element={<HomePage />} />
-          {/* Add other routes here */}
+          <Route path="/campaigns" element={<Campaigns />} />
+          <Route path="/campaigns/:campaignId" element={<CampaignDetail />} />
         </Routes>
       </Router>
-      </div>
-    )
+    </div>
+  );
 }
 
 export default App;

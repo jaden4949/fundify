@@ -35,8 +35,8 @@ const Campaigns = () => {
                 <h3 className="campaign-title">{campaign.title}</h3>
                 <p className="campaign-description">{campaign.description}</p>
                 <div className="campaign-funding">
-                  <p className="amount-raised">${campaign.goal} raised</p>
-                  <p className="funding-goal">Goal: ${campaign.amount}</p>
+                  <p className="amount-raised">${campaign.amount} raised</p>
+                  <p className="funding-goal">Goal: ${campaign.goal}</p>
                 </div>
               </div>
             </div>

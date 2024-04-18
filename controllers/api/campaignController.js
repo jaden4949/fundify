@@ -3,7 +3,7 @@ const Campaign = require('../../models/campaign');
 // Controller function to create a new campaign
 const createCampaign = async (req, res) => {
   try {
-    let { title, description, amount, photo } = req.body;
+    let { title, description, goal, photo } = req.body;
 
     // If photo is an object (like FormData), extract the file name
     if (typeof photo === 'object' && photo !== null) {
@@ -14,8 +14,9 @@ const createCampaign = async (req, res) => {
     const newCampaign = new Campaign({
       title,
       description,
-      amount,
-      photo
+      goal, // Use 'goal' here as it's been destructured from `req.body`
+      photo,
+      raised: 0 // Set the initial raised amount to 0
     });
 
     // Save the campaign to the database
