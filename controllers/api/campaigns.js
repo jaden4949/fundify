@@ -2,6 +2,8 @@ const Campaign = require('../../models/campaign');
 
 // Controller to create a new campaign
 async function createCampaign(req, res) {
+    console.log('---Backend Received campaign data:', req.body);
+
     // Extract campaign data from the request body
     const { title, description, amount, photo } = req.body;
 
@@ -28,17 +30,15 @@ async function createCampaign(req, res) {
 // Controller to get all campaigns
 async function getAllCampaigns(req, res) {
     try {
-        // Fetch all campaigns from the database
-        const campaigns = await Campaign.find();
-
-        // Respond with the list of campaigns
-        res.json(campaigns);
+      // Fetch all campaigns from the database, sorted by most recent first
+      const campaigns = await Campaign.find().sort('-createdAt').limit(5);
+      res.json(campaigns);
     } catch (error) {
-        console.error('Error getting campaigns:', error);
-        res.status(500).json({ error: 'An error occurred while getting campaigns' });
+      console.error('Error getting campaigns:', error);
+      res.status(500).json({ error: 'An error occurred while getting campaigns' });
     }
-}
-
+  }
+  
 // Controller to get a specific campaign by ID
 async function getCampaignById(req, res) {
     const { id } = req.params;

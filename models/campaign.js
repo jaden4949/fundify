@@ -14,8 +14,9 @@ const campaignSchema = new mongoose.Schema({
         required: true
     },
     photo: String
+}, {
+  timestamps: true // this will add `createdAt` and `updatedAt` fields automatically
 });
-
 const Campaign = mongoose.model('Campaign', campaignSchema);
 
 module.exports = Campaign;

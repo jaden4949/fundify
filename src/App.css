@@ -297,29 +297,86 @@
   cursor: pointer;
 }
 
-/* Campaign image */
+.campaign-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Creates a responsive grid */
+  gap: 1rem; /* Space between grid items */
+  margin: 2rem; /* Space around the entire grid */
+  padding: 0; /* Remove padding inside grid if any */
+}
+
+/* Individual campaign card style */
+.campaign-card {
+  border: 1px solid #ddd; /* Border for the card */
+  border-radius: 0.5rem; /* Rounded corners */
+  overflow: hidden; /* Ensures content fits within the card */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: box-shadow 0.3s; /* Smooth transition for shadow */
+}
+
+.campaign-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Larger shadow on hover for a "lifted" effect */
+}
+
+/* Campaign image style */
 .campaign-image {
-  width: 200px; /* Adjust as needed */
-  height: auto; /* Maintain aspect ratio */
+  width: 100%; /* Full width */
+  height: 350px; /* Fixed height for uniformity */
+  object-fit: cover; /* Cover the area without stretching */
+}
+
+/* Campaign details container */
+.campaign-details {
+  padding: 1rem; /* Padding inside the campaign details section */
 }
 
 /* Campaign title */
 .campaign-title {
-  font-size: 18px;
-  margin-top: 10px;
+  font-size: 1.25rem; /* Title size */
+  font-weight: bold; /* Bold title */
+  margin-bottom: 0.5rem; /* Space after the title */
 }
 
-/* Campaign description */
+/* Campaign description, adjusting the height to match your text length */
 .campaign-description {
-  font-size: 14px;
-  color: #666;
+  font-size: 1rem; /* Description text size */
+  color: #666; /* Light text color */
+  height: 3rem; /* Fixed height, can adjust based on your content */
+  overflow: hidden; /* Hide overflow text */
+  margin-bottom: 1rem; /* Space before the amount */
 }
 
-/* Amount raised */
-.amount-raised {
-  font-size: 14px;
-  color: #333;
+/* Campaign funding container */
+.campaign-funding {
+  margin-top: 1rem; /* Space from the description to the funding info */
 }
+
+/* Amount raised style */
+.amount-raised {
+  font-size: 1rem;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 0.5rem; /* Space between raised and goal */
+}
+
+/* Funding goal style */
+.funding-goal {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: normal;
+}
+
+
+/* You can remove or comment out any styles that directly conflict with the desired layout */
+/* For instance, if there's a style that explicitly sets a different display type for the same elements you're targeting for the grid, you would remove that */
+
+/* Keep media queries and keyframes if they're needed for other parts of your app */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Your existing keyframes and related styles */
+}
+
+/* Apply any additional global styles that you want to keep from your original CSS */
 
 @keyframes App-logo-spin {
   from {
