@@ -122,6 +122,34 @@ async function processDonation(req, res) {
     }
 }
 
+exports.processDonation = async (req, res) => {
+    const { campaignId } = req.params;
+    const { amount } = req.body; // Ensure that 'amount' is a number
+  
+    try {
+      const campaign = await Campaign.findByIdAndUpdate(
+        campaignId,
+        { $inc: { raised: amount } }, // Increment 'raised' by the 'amount' number
+        { new: true }
+      );
+  
+      if (!campaign) {
+        return res.status(404).json({ message: 'Campaign not found' });
+      }
+  
+      if (isNaN(donationAmount) || typeof donationAmount !== 'number') {
+        console.error('Invalid donation amount:', donationAmount);
+        return; // Prevent the API call if the validation fails
+      }
+      
+      res.json(campaign);
+    } catch (error) {
+      res.status(500).json({ message: 'Error processing donation', error });
+    }
+  };
+  
+  
+  
 module.exports = {
     createCampaign,
     getAllCampaigns,

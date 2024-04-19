@@ -24,14 +24,29 @@ const CampaignDetail = () => {
     }
   }, [campaignId]);
 
-  const handleDonate = async (donationAmount) => {
+  const handleDonate = async () => {
+const updatedCampaign = await donateToCampaign(campaignId, { amount: parseFloat(donationAmount) });
+// ...
+
     try {
-      const updatedCampaign = await donateToCampaign(campaign._id, donationAmount);
-      setCampaign(updatedCampaign); // Update the campaign state with the new raised amount
+      // Replace `donationAmount` with the actual amount being donated
+      const response = await donateToCampaign(campaignId, { amount: parseFloat(donationAmount) });
+      console.log('Updated campaign received:', response.data);
+  
+      // Update your campaign state here
+      setCampaign(prevCampaign => ({
+        ...prevCampaign,
+        raised: response.data.raised
+      }));
+  
+      // Reset donation input
+      setDonationAmount('');
     } catch (error) {
       console.error('Error processing donation:', error);
     }
   };
+  
+  
   
   if (!campaign) return <div>Loading...</div>;
 
@@ -40,17 +55,15 @@ const CampaignDetail = () => {
       <h1>{campaign.title}</h1>
       <img src={campaign.photo || defaultImage} alt={campaign.title} />
       <p>{campaign.description}</p>
-      {/* Display the raised amount and the goal */}
-      <p>${campaign.raised} raised of ${campaign.goal}</p> 
+      <p>${campaign.raised || 0} raised of ${campaign.goal}</p>
+
       <input
         type="number"
         value={donationAmount}
-        onChange={(e) => setDonationAmount(e.target.value)}
-        placeholder="Enter donation amount"
+        onChange={e => setDonationAmount(e.target.value)}
+        placeholder="Enter Donation Amount"
       />
       <button onClick={handleDonate}>Donate</button>
-      {/* Display donation history here */}
-      {/* ... */}
     </div>
   );
 };
