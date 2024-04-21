@@ -24,7 +24,7 @@ const Campaigns = () => {
 
   return (
     <div className="App">
-      {/*... other components like.App-header,.App-nav etc.... */}
+      {/*... other components like.App-header,.App-nav etc... */}
 
       <div className="campaign-grid">
         {campaigns.length > 0? campaigns.map(campaign => (
