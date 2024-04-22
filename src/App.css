@@ -1,7 +1,12 @@
 .App {
   text-align: center;
+  background-color: #182d31;
 }
-
+.App-title {
+  position: absolute;
+  top: 50px; /* Changed value */
+  margin-top: 3.4rem;
+}
 .App-logo {
   height: 30vmin;
   pointer-events: none;
@@ -13,16 +18,22 @@
   }
 }
 
+html, body {
+  height: 100%;
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  background-color: #182d31; /* Dark blue background color */
+}
+
 .App-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Changed from center to start */
   font-size: calc(10px + 2vmin);
   color: white;
   background-color: #182d31;
-  min-height: 100vh;
-  padding-top: 2rem;
+  padding-top: 10rem;
 }
 
 /* App.css */
@@ -208,12 +219,6 @@
 }
 
 
-.App-title {
-  position: absolute;
-  top: 100px;
-  margin-top: 5rem;
-}
-
 .App-link {
   color: #00ff88;
   text-decoration: none;
@@ -288,7 +293,8 @@
 
 /* Campaigns container */
 .campaigns {
-  margin-top: 20px;
+  margin-top: 4rem;
+  background-color: white;
 }
 
 /* Campaign item */
@@ -299,15 +305,17 @@
 
 .campaign-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Creates a responsive grid */
-  gap: 1rem; /* Space between grid items */
-  margin: 2rem; /* Space around the entire grid */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  background-color: #182d31; /* Creates a responsive grid */
+  gap: 5rem; /* Space between grid items */
+  margin: 8rem; /* Space around the entire grid */
   padding: 0; /* Remove padding inside grid if any */
 }
 
 /* Individual campaign card style */
 .campaign-card {
-  border: 1px solid #ddd; /* Border for the card */
+  border: #182d31;
+  background: white; /* Border for the card */
   border-radius: 0.5rem; /* Rounded corners */
   overflow: hidden; /* Ensures content fits within the card */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
