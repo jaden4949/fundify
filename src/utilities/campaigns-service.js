@@ -7,19 +7,16 @@ export async function createCampaign(campaignData) {
     return sendRequest(`${BASE_URL}/new`, 'POST', campaignData)
 }
 
-export async function getCampaigns() {
-    return sendRequest(BASE_URL, 'GET');
+export async function getCampaigns(params = {}) {
+    const query = new URLSearchParams(params).toString();
+    return sendRequest(`${BASE_URL}?${query}`, 'GET');
 }
 
-// In campaigns-service.js
 export async function getCampaignById(campaignId) {
     return sendRequest(`${BASE_URL}/${campaignId}`);
-  }
-  
-  // In campaigns-service.js
-// campaigns-service.js
+}
+
 export async function donateToCampaign(campaignId, donationAmount) {
     // Ensure your sendRequest function correctly handles POST requests
     return sendRequest(`${BASE_URL}/${campaignId}/donate`, 'POST', { amount: donationAmount });
-  }
-  
+}

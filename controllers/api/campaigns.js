@@ -30,15 +30,19 @@ async function createCampaign(req, res) {
 
 // Controller to get all campaigns
 async function getAllCampaigns(req, res) {
+    const { limit } = req.query;
     try {
-      // Fetch all campaigns from the database, sorted by most recent first
-      const campaigns = await Campaign.find().sort('-createdAt').limit(5);
-      res.json(campaigns);
+        let query = Campaign.find().sort('-createdAt');
+        if (limit) {
+            query = query.limit(Number(limit));
+        }
+        const campaigns = await query;
+        res.json(campaigns);
     } catch (error) {
-      console.error('Error getting campaigns:', error);
-      res.status(500).json({ error: 'An error occurred while getting campaigns' });
+        console.error('Error getting campaigns:', error);
+        res.status(500).json({ error: 'An error occurred while getting campaigns' });
     }
-  }
+}
 
 // Controller to get a specific campaign by ID
 async function getCampaignById(req, res) {
