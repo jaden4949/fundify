@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getCampaignById, donateToCampaign } from '../utilities/campaigns-service';
+import { getCampaignById } from '../utilities/campaigns-service';
 
 const defaultImage = '/default-image.jpg'; // Make sure you have this default image in your public folder
 
@@ -8,6 +8,35 @@ const CampaignDetail = () => {
   const [campaign, setCampaign] = useState(null);
   const [donationAmount, setDonationAmount] = useState('');
   const { campaignId } = useParams();
+
+  const handleDonate = async () => {
+    try {
+      const response = await fetch(`/api/campaigns/${campaignId}/donate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ amount: donationAmount }),
+      });
+      const updatedCampaign = await response.json();
+
+      // Update your campaign state here
+      setCampaign(prevCampaign => ({
+        ...prevCampaign,
+        raised: updatedCampaign.raised
+      }));
+
+      // Reset donation input
+      setDonationAmount('');
+
+      // Handle success (e.g., show a message, update UI)
+      console.log('Donation successful:', updatedCampaign);
+
+    } catch (error) {
+      console.error('Error processing donation:', error);
+      // Handle error (e.g., show error message)
+    }
+  };
 
   useEffect(() => {
     async function fetchCampaign() {
@@ -24,30 +53,6 @@ const CampaignDetail = () => {
     }
   }, [campaignId]);
 
-  const handleDonate = async () => {
-const updatedCampaign = await donateToCampaign(campaignId, { amount: parseFloat(donationAmount) });
-// ...
-
-    try {
-      // Replace `donationAmount` with the actual amount being donated
-      const response = await donateToCampaign(campaignId, { amount: parseFloat(donationAmount) });
-      console.log('Updated campaign received:', response.data);
-  
-      // Update your campaign state here
-      setCampaign(prevCampaign => ({
-        ...prevCampaign,
-        raised: response.data.raised
-      }));
-  
-      // Reset donation input
-      setDonationAmount('');
-    } catch (error) {
-      console.error('Error processing donation:', error);
-    }
-  };
-  
-  
-  
   if (!campaign) return <div>Loading...</div>;
 
   return (
