@@ -334,9 +334,51 @@ html, body {
 }
 
 /* Campaign details container */
-.campaign-details {
-  padding: 1rem; /* Padding inside the campaign details section */
+.campaign-detail {
+  max-width: 600px; /* Reduced width to shrink the container */
+  background: white; /* Adjust based on your design preference */
+  margin: 4rem auto; /* Increased top margin to move the container down */
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
 }
+
+.campaign-detail img {
+  max-width: 100%; /* Ensures image is responsive */
+  height: auto; /* Keeps the image aspect ratio */
+  margin-bottom: 1rem; /* Adds some space below the image */
+}
+
+.campaign-detail h1 {
+  color: #000000; /* Darker shade for better readability */
+  margin-bottom: 0.5rem;
+}
+
+.campaign-detail p {
+  line-height: 1.6; /* Improves readability */
+}
+
+.campaign-detail input[type="number"] {
+  padding: 0.5rem;
+  margin-right: 0.5rem; /* Adds space between the input and the button */
+  width: 100%; /* Full width to adjust within the container */
+  max-width: 200px; /* Ensures the input doesn't get too wide */
+  border: 1px solid #969696;
+  border-radius: 4px;
+}
+
+.campaign-detail button {
+  padding: 0.5rem 1rem;
+  background-color: #00ff88; /* Primary button color */
+  color: #464646;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.campaign-detail button:hover {
+  background-color: #00cc66; /* Slightly darker shade on hover */
+}
+
 
 /* Campaign title */
 .campaign-title {
