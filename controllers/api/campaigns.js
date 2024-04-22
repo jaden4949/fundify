@@ -1,32 +1,39 @@
+const jwt = require('jsonwebtoken');
 const Campaign = require('../../models/campaign');
+const { decodeToken } = require('../../src/utilities/jwtUtils');
 
 // Controller to create a new campaign
 async function createCampaign(req, res) {
-    console.log('---Backend Received campaign data:', req.body);
-
-    // Extract campaign data from the request body
-    const { title, description, goal, photo } = req.body;
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(' ')[1];
 
     try {
-        // Create a new campaign instance with raised amount initialized to 0
+        const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        req.body.userId = decoded.id; // Assuming the user's ID is stored under 'id' in the JWT payload
+
+        console.log("Decoded ID:", decoded.id); // This should print the decoded user ID
+        
+        // Log the entire request body to make sure everything is received correctly
+        console.log("Request Body:", req.body);
+
+        const { title, description, goal, photo, userId } = req.body;
         const campaign = new Campaign({
             title,
             description,
             goal,
             photo,
-            raised: 0 // Initialize raised amount to 0
+            raised: 0,
+            creator: userId
         });
 
-        // Save the campaign to the database
         await campaign.save();
-
-        // Respond with the newly created campaign
         res.status(201).json(campaign);
     } catch (error) {
-        console.error('Error creating campaign:', error);
+        console.error('Error creating campaign:', error.message);
         res.status(500).json({ error: 'An error occurred while creating the campaign' });
     }
 }
+
 
 // Controller to get all campaigns
 async function getAllCampaigns(req, res) {
@@ -129,36 +136,32 @@ async function processDonation(req, res) {
 exports.processDonation = async (req, res) => {
     const { campaignId } = req.params;
     const { amount } = req.body; // Ensure that 'amount' is a number
-  
+
     try {
       const campaign = await Campaign.findByIdAndUpdate(
         campaignId,
         { $inc: { raised: amount } }, // Increment 'raised' by the 'amount' number
         { new: true }
       );
-  
+
       if (!campaign) {
-        return res.status(404).json({ message: 'Campaign not found' });
+        return res.status(404).json({ error: 'Campaign not found' });
       }
-  
-      if (isNaN(donationAmount) || typeof donationAmount !== 'number') {
-        console.error('Invalid donation amount:', donationAmount);
-        return; // Prevent the API call if the validation fails
-      }
-      
-      res.json(campaign);
+
+      // Return the updated campaign
+      return res.status(200).json(campaign);
     } catch (error) {
-      res.status(500).json({ message: 'Error processing donation', error });
+      console.error('Error processing donation:', error);
+      return res.status(500).json({ error: 'An error occurred while processing the donation' });
     }
   };
-  
-  
-  
+
+// Export all the controllers
 module.exports = {
     createCampaign,
     getAllCampaigns,
     getCampaignById,
     updateCampaign,
     deleteCampaign,
-    processDonation // Make sure to export the processDonation function
+    processDonation
 };

@@ -3,7 +3,7 @@ const Campaign = require('../models/campaign');
 async function fetchAllCampaigns(req, res) {
   console.log('Fetching all campaigns...');
   try {
-    const campaigns = await Campaign.find();
+    const campaigns = await Campaign.find().populate('creator').exec();
     res.json(campaigns);
   } catch (error) {
     console.error('Error fetching campaigns:', error);
