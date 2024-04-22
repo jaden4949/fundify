@@ -1,51 +1,44 @@
 const jwt = require('jsonwebtoken');
 const Campaign = require('../../models/campaign');
 
+// Controller function to create a new campaign
 const createCampaign = async (req, res) => {
   try {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
-      return res.status(401).json({ message: 'No authorization header sent' });
+      return res.status(401).send('Access Denied / Unauthorized request');
     }
 
-    const token = authHeader.split(' ')[1]; // Assuming Bearer token format
+    const token = authHeader.split(' ')[1];
     if (!token) {
-      return res.status(401).json({ message: 'Malformed authorization header' });
+      return res.status(401).send('Access Denied / Unauthorized request');
     }
 
+    // Decoding the JWT to get user ID
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const userId = decoded.user?._id;
 
-    let { title, description, goal, photo } = req.body;
+    console.log("Decoded User ID:", userId); // This should log the correct user ID
 
-    // If photo is an object (like FormData), extract the file name
-    if (typeof photo === 'object' && photo!== null) {
-      photo = photo.name; // Assuming the object has a name property
+    if (!userId) {
+      return res.status(401).json({ error: "User ID not found in token" });
     }
 
-    console.log("Decoded User ID:", decoded.userId);
-    console.log("User ID from request body:", req.body.userId);
-
-    // Create a new campaign instance
+    const { title, description, goal, photo } = req.body;
     const newCampaign = new Campaign({
       title,
       description,
-      goal, // Use 'goal' here as it's been destructured from `req.body`
+      goal,
       photo,
-      raised: 0, // Set the initial raised amount to 0
-      creator: decoded.userId // Set the creator field with the userId from the JWT
+      raised: 0,
+      creator: userId // Setting the creator field with the userId from the JWT
     });
 
-    // Save the campaign to the database
     await newCampaign.save();
-    console.log("campaign created", newCampaign)
-    res.status(201).json(newCampaign); // Return the created campaign
+    res.status(201).json(newCampaign);
   } catch (error) {
-    // You'll want to handle JWT-specific errors separately for more accurate error responses
-    if (error instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({ message: 'Invalid token' });
-    }
     console.error('Error creating campaign:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ error: 'An error occurred while creating the campaign' });
   }
 };
 
