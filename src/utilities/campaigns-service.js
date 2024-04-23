@@ -21,6 +21,5 @@ export async function getCampaignsByUser(userId) {
   }
 
 export async function donateToCampaign(campaignId, donationAmount) {
-    // Ensure your sendRequest function correctly handles POST requests
     return sendRequest(`${BASE_URL}/${campaignId}/donate`, 'POST', { amount: donationAmount });
 }

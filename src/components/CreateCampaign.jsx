@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { createCampaign } from '../utilities/campaigns-service'; // Assuming you have a function to create campaigns
-import '../App.css'; // Import the CSS file
+import { createCampaign } from '../utilities/campaigns-service';
+import '../App.css';
 
 const CreateCampaign = () => {
   const [title, setTitle] = useState('');
@@ -14,18 +14,17 @@ const CreateCampaign = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPhoto(reader.result); // Store the base64 string
+        setPhoto(reader.result);
       };
       reader.readAsDataURL(file);
     } else {
-      setPhoto(null); // Reset if no file is selected
+      setPhoto(null);
     }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Prepare campaign data object
     const campaignData = {
       title,
       description,
@@ -34,30 +33,22 @@ const CreateCampaign = () => {
     };
 
     try {
-      // Send campaign data to the server
       await createCampaign(campaignData);
 
-      // Reset form fields
       setTitle('');
       setDescription('');
       setGoal(0);
       setPhoto(null);
-
-      // Display success message
       setShowSuccessMessage(true);
-
-      // Redirect to the main page after 2 seconds
       setTimeout(() => {
-        window.location.href = '/'; // Redirect to the main page
+        window.location.href = '/';
       }, 2000);
     } catch (error) {
       console.error('Error creating campaign:', error);
-      // Optionally, handle errors (e.g., display error message)
     }
   };
 
   const handleClose = () => {
-    // Close the form and redirect to the home page
     window.location.href = '/';
   };
 
@@ -102,7 +93,7 @@ const CreateCampaign = () => {
           <input
             type="file"
             id="photo"
-            onChange={handlePhotoChange}  // Updated to use the new handler
+            onChange={handlePhotoChange}
             className="CreateCampaign-input"
           />
           <button type="submit" className="CreateCampaign-button">

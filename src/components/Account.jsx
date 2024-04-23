@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';  // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
 import '../App.css';
 import { getUser } from '../utilities/users-service';
 import { getCampaignsByUser } from '../utilities/campaigns-service';

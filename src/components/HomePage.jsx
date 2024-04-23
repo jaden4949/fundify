@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getCampaigns } from '../utilities/campaigns-service';
 
-const defaultImage = '/default-image.jpg'; // Path to the default image
+const defaultImage = '/default-image.jpg';
 
 const Campaigns = () => {
   const [campaigns, setCampaigns] = useState([]);

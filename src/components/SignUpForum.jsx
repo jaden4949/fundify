@@ -27,7 +27,6 @@ class SignUpForm extends Component {
         password: this.state.password
       });
       this.props.setUser(user);
-      // Close the form after successful sign-up
       this.setState({
         name: '',
         email: '',
@@ -40,7 +39,6 @@ class SignUpForm extends Component {
   };
 
   handleClose = () => {
-    // Close the form and redirect to the home page
     this.setState({
       name: '',
       email: '',
@@ -49,7 +47,6 @@ class SignUpForm extends Component {
       error: '',
       formVisible: false
     });
-    // Redirect to the home page
     window.location.href = '/';
   };
 
@@ -57,7 +54,6 @@ class SignUpForm extends Component {
     const { formVisible, name, email, password, confirm, error } = this.state;
     const disable = password !== confirm;
 
-    // Render the form only if formVisible is true
     return formVisible ? (
       <div className="signup-container">
         <div className="form-container">
@@ -76,7 +72,7 @@ class SignUpForm extends Component {
         </div>
         <p className="error-message">&nbsp;{error}</p>
       </div>
-    ) : null; // Render nothing if formVisible is false
+    ) : null;
   }
 }
 

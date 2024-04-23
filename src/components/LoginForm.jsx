@@ -18,16 +18,14 @@ export default function LoginForm() {
     evt.preventDefault();
     try {
       const loggedInUser = await usersService.login(credentials);
-      // Redirect to the homepage after successful login
-      window.location.href = '/'; // Replace '/' with the URL of your homepage
+      window.location.href = '/';
     } catch {
       setError('Log In Failed - Try Again');
     }
   }
 
   function handleCloseForm() {
-    // Redirect to the homepage
-    window.location.href = '/'; // Replace '/' with the URL of your homepage
+    window.location.href = '/';
   }
 
   return (

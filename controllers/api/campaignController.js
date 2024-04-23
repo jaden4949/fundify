@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const Campaign = require('../../models/campaign');
 
-// Controller function to create a new campaign
 const createCampaign = async (req, res) => {
   try {
     const authHeader = req.headers.authorization;
@@ -14,11 +13,10 @@ const createCampaign = async (req, res) => {
       return res.status(401).send('Access Denied / Unauthorized request');
     }
 
-    // Decoding the JWT to get user ID
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     const userId = decoded.user?._id;
 
-    console.log("Decoded User ID:", userId); // This should log the correct user ID
+    console.log("Decoded User ID:", userId);
 
     if (!userId) {
       return res.status(401).json({ error: "User ID not found in token" });
@@ -31,7 +29,7 @@ const createCampaign = async (req, res) => {
       goal,
       photo,
       raised: 0,
-      creator: userId // Setting the creator field with the userId from the JWT
+      creator: userId
     });
 
     await newCampaign.save();

@@ -2,16 +2,15 @@ const jwt = require('jsonwebtoken');
 const Campaign = require('../../models/campaign');
 const { decodeToken } = require('../../src/utilities/jwtUtils');
 
-// Controller to create a new campaign
 async function createCampaign(req, res) {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
 
     try {
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-        req.body.userId = decoded.id; // Assuming the user's ID is stored under 'id' in the JWT payload
+        req.body.userId = decoded.id;
 
-        console.log("Decoded ID:", decoded.id); // This should print the decoded user ID
+        console.log("Decoded ID:", decoded.id);
         console.log("Request Body:", req.body);
 
         const { title, description, goal, photo, userId } = req.body;
@@ -32,7 +31,6 @@ async function createCampaign(req, res) {
     }
 }
 
-// Controller to get all campaigns
 async function getAllCampaigns(req, res) {
     const { limit } = req.query;
     try {
@@ -48,7 +46,6 @@ async function getAllCampaigns(req, res) {
     }
 }
 
-// Controller to get a specific campaign by ID
 async function getCampaignById(req, res) {
     const { id } = req.params;
     try {
@@ -63,7 +60,6 @@ async function getCampaignById(req, res) {
     }
 }
 
-// Controller to get campaigns created by a specific user using middleware to set req.user
 async function getCampaignsByUserId(req, res) {
     if (!req.user || !req.user._id) {
         return res.status(401).json({ message: 'Unauthorized' });
@@ -78,7 +74,6 @@ async function getCampaignsByUserId(req, res) {
     }
 }
 
-// Controller to update a campaign
 async function updateCampaign(req, res) {
     const { id } = req.params;
     const updates = req.body;
@@ -94,7 +89,6 @@ async function updateCampaign(req, res) {
     }
 }
 
-// Controller to delete a campaign
 async function deleteCampaign(req, res) {
     const { id } = req.params;
     try {
@@ -109,7 +103,6 @@ async function deleteCampaign(req, res) {
     }
 }
 
-// Controller to process a donation to a campaign
 async function processDonation(req, res) {
     const { id } = req.params;
     const { amount } = req.body;
@@ -126,7 +119,6 @@ async function processDonation(req, res) {
     }
 }
 
-// Export all the controllers
 module.exports = {
     createCampaign,
     getAllCampaigns,

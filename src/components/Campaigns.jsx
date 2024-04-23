@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getCampaigns } from '../utilities/campaigns-service';
 
-const defaultImage = '/default-image.jpg'; // Path to the default image
+const defaultImage = '/default-image.jpg';
 
 const Campaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -11,8 +11,8 @@ const Campaigns = () => {
     async function fetchAllCampaigns() {
       try {
         const response = await getCampaigns();
-        console.log("API Response:", response); // Log the response to check structure
-        setCampaigns(response); // Assuming response is the array of campaigns directly
+        console.log("API Response:", response);
+        setCampaigns(response);
       } catch (error) {
         console.error('Error fetching campaigns:', error);
         setCampaigns([]);

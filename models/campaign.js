@@ -16,7 +16,7 @@ const campaignSchema = new mongoose.Schema({
   photo: String,
     raised: {
     type: Number,
-    default: 0, // Start with 0 raised amount
+    default: 0,
   },
 creator: {
   type: mongoose.Schema.Types.ObjectId,
@@ -24,7 +24,7 @@ creator: {
 }
 
 }, {
-  timestamps: true // this will add `createdAt` and `updatedAt` fields automatically
+  timestamps: true
 });
 
 const Campaign = mongoose.model('Campaign', campaignSchema);

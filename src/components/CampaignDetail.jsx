@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getUser } from '../utilities/users-service'; // Ensure this import is correct
+import { getUser } from '../utilities/users-service';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getCampaignById } from '../utilities/campaigns-service';
@@ -17,23 +17,23 @@ const CampaignDetail = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('Current User:', user); // Log to check the current user object
+    console.log('Current User:', user);
     if (campaignId) {
       fetchCampaign();
     }
-  }, [campaignId, user]); // Adding user as a dependency so we re-run this effect if user changes
+  }, [campaignId, user]);
 
   const fetchCampaign = async () => {
     try {
       const fetchedCampaign = await getCampaignById(campaignId);
-      console.log('Fetched Campaign:', fetchedCampaign); // Log to check the fetched campaign details
+      console.log('Fetched Campaign:', fetchedCampaign);
       setCampaign(fetchedCampaign);
       setEditData({
         title: fetchedCampaign.title,
         description: fetchedCampaign.description,
         goal: fetchedCampaign.goal
       });
-      console.log('Creator Check:', user?._id, fetchedCampaign.creatorId); // Log to check IDs match
+      console.log('Creator Check:', user?._id, fetchedCampaign.creatorId);
     } catch (error) {
       console.error('Error fetching campaign details:', error);
     }
@@ -70,7 +70,7 @@ const CampaignDetail = () => {
     } catch (error) {
       console.error('Error updating campaign:', error);
     }
-    setIsEditing(false);  // Exit editing mode after update
+    setIsEditing(false);
   };
 
   const handleDelete = async () => {
@@ -80,7 +80,7 @@ const CampaignDetail = () => {
         setShowDeleteSuccess(true);
         setTimeout(() => {
           navigate('/');
-        }, 2000); // Redirect after 2 seconds
+        }, 2000);
       }
     } catch (error) {
       console.error('Error deleting campaign:', error);
@@ -96,7 +96,6 @@ const CampaignDetail = () => {
 
   if (!campaign) return <div>Loading...</div>;
 
-  // Adjust this condition to match the 'creator' field in your schema
   const isUserTheCreator = user && user._id === campaign.creator;
 
   return (
