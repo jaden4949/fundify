@@ -439,6 +439,22 @@ html, body {
   font-weight: normal;
 }
 
+/* Styles for the deletion success message */
+/* Styles for the deletion success message */
+.deletion-success {
+  position: fixed; /* Fixed position to overlay on top of other content */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset the div by its own dimensions to truly center it */
+  color: #00ff88; /* Bright green text to align with your button colors */
+  font-size: 1.5rem; /* Larger text size for visibility */
+  background-color: rgba(4, 8, 9, 0.85); /* Dark blue background with slight transparency */
+  padding: 20px;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  text-align: center; /* Center the text inside the div */
+}
+
 
 /* You can remove or comment out any styles that directly conflict with the desired layout */
 /* For instance, if there's a style that explicitly sets a different display type for the same elements you're targeting for the grid, you would remove that */
