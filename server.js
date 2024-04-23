@@ -15,6 +15,13 @@ app.use('/api/campaigns', campaignRoutes);
 app.use(logger('dev'));
 app.use(express.json());
 
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    req.headers['host'] = 'https://peaceful-lowlands-48294-39948cb92041.herokuapp.com';
+    next();
+  });
+}
+
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
