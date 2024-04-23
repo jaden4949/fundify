@@ -1,6 +1,8 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
-     
+
 module.exports = function(app) {
-    app.use(createProxyMiddleware('/api/**', { target: 'http://localhost:3001' }));
-    app.use(createProxyMiddleware('/otherApi/**', { target: 'http://localhost:3001' }));
+    const target = process.env.NODE_ENV === 'production' ? 'https://peaceful-lowlands-48294-39948cb92041.herokuapp.com' : 'http://localhost:3001';
+
+    app.use(createProxyMiddleware('/api/**', { target: target }));
+    app.use(createProxyMiddleware('/otherApi/**', { target: target }));
 };
