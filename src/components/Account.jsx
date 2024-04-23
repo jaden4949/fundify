@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 import '../App.css';
 import { getUser } from '../utilities/users-service';
 import { getCampaignsByUser } from '../utilities/campaigns-service';
@@ -51,28 +51,31 @@ const UserCampaigns = () => {
     }
 
     const userCampaigns = campaigns.filter(campaign => campaign.creator === userId);
-
-    return userCampaigns.map(campaign => (
-      <div key={campaign._id} className="campaign-item">
-        <h2 className="campaign-title">{campaign.title}</h2>
-        <p className="campaign-description">{campaign.description}</p>
-        <p className="campaign-goal">Goal: ${campaign.goal}</p>
-        <p className="campaign-raised">Raised: ${campaign.raised}</p>
-      </div>
-    ));
+    let campaignElements = [];
+    for (let i = 0; i < userCampaigns.length; i++) {
+      const campaign = userCampaigns[i];
+      campaignElements.push(
+        <Link to={`/campaigns/${campaign._id}`} key={campaign._id} className="campaign-item">
+          <h2 className="campaign-title">{campaign.title}</h2>
+          <p className="campaign-description">{campaign.description}</p>
+          <p className="campaign-goal">Goal: ${campaign.goal}</p>
+          <p className="campaign-raised">Raised: ${campaign.raised}</p>
+        </Link>
+      );
+    }
+    return campaignElements;
   };
 
   if (loading) return <div>Loading...</div>;
 
   return (
     <div>
-      <h1 className="your-campaigns-title">Here are your campaigns</h1>  {/* Apply the CSS class here */}
+      <h1 className="your-campaigns-title">Here are your campaigns</h1>
       <div className="campaign-list">
         {renderCampaigns()}
       </div>
     </div>
   );
-  
 }
 
 export default UserCampaigns;
