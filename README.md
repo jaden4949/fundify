@@ -13,6 +13,7 @@ Fundify is a project where users can go and create crowdfunding campaigns and ot
 ### Links
 
 Trello link: https://trello.com/b/75ZTAY6J/fundify
+
 Link to App:
 
 ### Next Steps
