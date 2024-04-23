@@ -43,3 +43,16 @@ app.get('/*', function(req, res) {
 app.listen(port, function() {
   console.log(`Express app running on port ${port}`);
 });
+
+// Example in a Node.js/Express server-side route
+app.get('/api/campaigns/:id', async (req, res) => {
+  try {
+    const campaign = await Campaign.findById(req.params.id);
+    if (!campaign) {
+      return res.status(404).send('Campaign not found');
+    }
+    res.send(campaign); // Ensure this sends back all required fields, including creatorId
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});

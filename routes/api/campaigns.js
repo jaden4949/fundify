@@ -1,18 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const authenticateToken = require('../../config/checkToken'); 
-
-// Import named exports from campaignController.js
-const { createCampaign } = require('../../controllers/api/campaignController');
-
-// Import named exports from campaigns.js
-const { 
-  getAllCampaigns, 
-  getCampaignById, 
-  updateCampaign, 
+const authenticateToken = require('../../config/checkToken');
+const Campaign = require('../../models/campaign'); // Adjust the path as necessary
+const {
+  createCampaign,
+  getAllCampaigns,
+  updateCampaign,
   deleteCampaign,
   processDonation,
-  getCampaignsByUserId // Make sure this function is exported as a named export
+  getCampaignsByUserId
 } = require('../../controllers/api/campaigns');
 
 // Route to create a new campaign
@@ -22,8 +18,19 @@ router.post('/new', createCampaign);
 router.get('/', getAllCampaigns);
 
 // Route to get a specific campaign by ID
-router.get('/:id', getCampaignById);
+router.get('/:id', async (req, res) => {
+  try {
+    const campaign = await Campaign.findById(req.params.id);
+    if (!campaign) {
+      return res.status(404).send('Campaign not found');
+    }
+    res.send(campaign);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
+// Route to get campaigns by user ID
 router.get('/user/:userId', authenticateToken, getCampaignsByUserId);
 
 // Route to update a campaign
