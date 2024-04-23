@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const authenticateToken = require('../../config/checkToken'); 
 
 // Import named exports from campaignController.js
 const { createCampaign } = require('../../controllers/api/campaignController');
@@ -17,13 +18,13 @@ const {
 // Route to create a new campaign
 router.post('/new', createCampaign);
 
-router.get('/user/campaigns', getCampaignsByUserId);
-
 // Route to get all campaigns
 router.get('/', getAllCampaigns);
 
 // Route to get a specific campaign by ID
 router.get('/:id', getCampaignById);
+
+router.get('/user/campaigns', authenticateToken, getCampaignsByUserId);
 
 // Route to update a campaign
 router.put('/:id', updateCampaign);
