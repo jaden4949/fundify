@@ -9,6 +9,19 @@ const CreateCampaign = () => {
   const [photo, setPhoto] = useState(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
+  const handlePhotoChange = event => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhoto(reader.result); // Store the base64 string
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setPhoto(null); // Reset if no file is selected
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -89,7 +102,7 @@ const CreateCampaign = () => {
           <input
             type="file"
             id="photo"
-            onChange={(event) => setPhoto(event.target.files[0])}
+            onChange={handlePhotoChange}  // Updated to use the new handler
             className="CreateCampaign-input"
           />
           <button type="submit" className="CreateCampaign-button">
