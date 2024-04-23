@@ -24,7 +24,7 @@ router.get('/', getAllCampaigns);
 // Route to get a specific campaign by ID
 router.get('/:id', getCampaignById);
 
-router.get('/user/campaigns', authenticateToken, getCampaignsByUserId);
+router.get('/user/:userId', authenticateToken, getCampaignsByUserId);
 
 // Route to update a campaign
 router.put('/:id', updateCampaign);
