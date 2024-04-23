@@ -34,6 +34,7 @@ html, body {
   color: white;
   background-color: #182d31;
   padding-top: 10rem;
+  z-index: 1;
 }
 
 /* App.css */
@@ -52,6 +53,7 @@ html, body {
   border: none;
   border-bottom: 1px solid #00ff88;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
 .App-nav-links {
@@ -453,6 +455,17 @@ html, body {
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   text-align: center; /* Center the text inside the div */
+}
+
+
+/* Styles for the "Your Campaigns" header */
+.your-campaigns-title {
+  font-size: 55px; /* Adjust size as needed */
+  font-weight: bold; /* Makes the text bold */
+  color: white;
+  margin-top: 50px; /* Dark grey text, adjust the color to match your design */
+  margin-bottom: 20px; /* Adds space below the title */
+  text-align: center; /* Centers the title, change if different alignment is desired */
 }
 
 

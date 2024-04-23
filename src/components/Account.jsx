@@ -66,12 +66,13 @@ const UserCampaigns = () => {
 
   return (
     <div>
-      <h1>Your Campaigns</h1>
+      <h1 className="your-campaigns-title">Here are your campaigns</h1>  {/* Apply the CSS class here */}
       <div className="campaign-list">
         {renderCampaigns()}
       </div>
     </div>
   );
+  
 }
 
 export default UserCampaigns;
