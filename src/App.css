@@ -279,11 +279,12 @@ html, body {
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: transform 0.2s
 }
 
 .CreateCampaign-button:hover {
   background-color: #00cc66;
+  transform: translateY(-3px);
 }
 
 .CreateCampaign-success-message {
@@ -292,16 +293,37 @@ html, body {
 }
 
 /* Campaigns container */
-.campaigns {
-  margin-top: 4rem;
-  background-color: white;
+.campaign-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
 }
 
 /* Campaign item */
 .campaign-item {
-  margin-bottom: 20px;
-  cursor: pointer;
+  background-color: #ffffff;
+  color: #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  width: 90%;
+  max-width: 800px;
+  margin: 1rem;
+  padding: 1.5rem;
+  transition: transform 0.2s;
 }
+
+.campaign-item:hover {
+  transform: translateY(-5px);
+}
+
+.campaign-goal,
+.campaign-raised {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
 
 .campaign-grid {
   display: grid;
@@ -319,11 +341,12 @@ html, body {
   border-radius: 0.5rem; /* Rounded corners */
   overflow: hidden; /* Ensures content fits within the card */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  transition: box-shadow 0.3s; /* Smooth transition for shadow */
+  transition: transform 0.2s; /* Smooth transition for shadow */
 }
 
 .campaign-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Larger shadow on hover for a "lifted" effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px); /* Larger shadow on hover for a "lifted" effect */
 }
 
 /* Campaign image style */

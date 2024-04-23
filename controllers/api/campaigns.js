@@ -71,6 +71,28 @@ async function getCampaignById(req, res) {
     }
 }
 
+// Controller to get campaigns created by a specific user
+async function getCampaignsByUserId(req, res) {
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(' ')[1];
+    
+    if (!token) {
+        return res.status(403).json({ error: 'A token is required for authentication' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        const userId = decoded.id;
+
+        const userCampaigns = await Campaign.find({ creator: userId }).sort('-createdAt');
+        res.json(userCampaigns);
+    } catch (error) {
+        console.error('Error fetching user campaigns:', error);
+        res.status(500).json({ error: 'An error occurred while fetching the user campaigns' });
+    }
+}
+
+
 // Controller to update a campaign
 async function updateCampaign(req, res) {
     const { id } = req.params;
@@ -163,5 +185,6 @@ module.exports = {
     getCampaignById,
     updateCampaign,
     deleteCampaign,
-    processDonation
+    processDonation,
+    getCampaignsByUserId
 };

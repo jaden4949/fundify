@@ -10,11 +10,14 @@ const {
   getCampaignById, 
   updateCampaign, 
   deleteCampaign,
-  processDonation // Make sure this function is exported as a named export
+  processDonation,
+  getCampaignsByUserId // Make sure this function is exported as a named export
 } = require('../../controllers/api/campaigns');
 
 // Route to create a new campaign
 router.post('/new', createCampaign);
+
+router.get('/user/campaigns', getCampaignsByUserId);
 
 // Route to get all campaigns
 router.get('/', getAllCampaigns);
